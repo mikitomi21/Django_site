@@ -16,7 +16,8 @@
             <h4>{{room.name}}</h4>
         </a>
         
-        <a href="{% url 'update-room' room.id %}">Update Room</a>
+        <a href="{% url 'update-room' room.id %}">Edit</a>
+        <a href="{% url 'delete-room' room.id %}">Delete</a>
         <hr>
         {% endfor %}
     </div>

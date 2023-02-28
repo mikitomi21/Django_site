@@ -23,14 +23,14 @@
 
         {% for topic in topics %}
             <div>
-                <a href="{% url 'home' %}?queryTopic={{topic.name}}">{{topic.name}}</a>
+                <a href="{% url 'home' %}?query={{topic.name}}">{{topic.name}}</a>
             </div>
         {% endfor %}
 
     </div>
 
     <div>
-        
+        <h5>Available {{room_count}}</h5>
         <a href="{% url 'add-user' %}">Add User</a>
         <a href="{% url 'delete-user' %}">Delete User</a>
         <a href="{% url 'create-room' %}">Create Room</a>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Room
 from .forms import RoomForm, UserForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -69,3 +70,19 @@ def addUser(request):
 
     context = {'form': form}
     return render(request, 'base/add_user.html', context)
+
+def deleteUser(request):
+    form = UserForm()
+
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid:
+            name = request.POST.get('username')
+            passw = request.POST.get('password')
+            #TODO it works only with existing user
+            user = User.objects.get(username=name, password=passw)
+            user.delete()
+            return redirect('home')
+
+    context = {'form': form}
+    return render(request, 'base/delete_user.html', context)

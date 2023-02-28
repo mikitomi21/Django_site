@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Room
+from .models import Room, Topic
 from .forms import RoomForm, UserForm
 from django.contrib.auth.models import User
 
@@ -16,8 +16,13 @@ rooms = [
 
 
 def home(request):
-    rooms = Room.objects.all()
-    context = {'rooms':rooms}
+    queryTopic = request.GET.get('queryTopic') if request.GET.get('queryTopic') != None else ''
+    rooms = Room.objects.filter(topic__name__icontains=queryTopic)
+
+    topics = Topic.objects.all()
+
+    context = {'rooms':rooms,
+               'topics':topics}
     return render(request, 'base/home.html', context)
 
 def room(request, pk):

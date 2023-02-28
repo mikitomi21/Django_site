@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Room
-from .forms import RoomForm
+from .forms import RoomForm, UserForm
 
 # Create your views here.
 
@@ -57,3 +57,15 @@ def deleteRoom(request, pk):
     
     context = {'obj': room}
     return render(request, 'base/delete.html', context)
+
+def addUser(request):
+
+    form = UserForm()
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid and request.POST.get('username') and request.POST.get('password'):
+            form.save()
+            return redirect('home')
+
+    context = {'form': form}
+    return render(request, 'base/add_user.html', context)

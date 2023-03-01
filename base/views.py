@@ -22,18 +22,14 @@ def loginPage(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
-        
-        try:
-            user = User.objects.get(username=username)
-        except:
-            #print("User doesn't exist")
-            messages.error(request, "User doesn't exist")
-        
+ 
         user = authenticate(request, username=username, password=password)
 
         if user:
             login(request, user)
             return redirect('home')
+        else:
+            messages.error(request, "User doesn't exist")
 
     context = {}
     return render(request, 'base/login_register.html', context)

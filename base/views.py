@@ -17,7 +17,7 @@ rooms = [
 ]
 '''
 
-def loginPage(request):
+def loginUser(request):
 
     if request.method == "POST":
         username = request.POST.get('username')
@@ -34,6 +34,9 @@ def loginPage(request):
     context = {}
     return render(request, 'base/login_register.html', context)
 
+def logoutUser(request):
+    logout(request)
+    return redirect('home')
 
 def home(request):
     query = request.GET.get('query') if request.GET.get('query') != None else ''

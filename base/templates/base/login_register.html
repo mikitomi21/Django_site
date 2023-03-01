@@ -14,14 +14,6 @@
         <br><br>
         <input type="submit" value="Login">
     </form>
-
-    {% if messages %}
-    <ul class="message">
-        {% for message in messages %}
-        <li {% if message.tags %} class="{{message.tags}}"{% endif %}>{{message}}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
 </div>
 
 {% endblock %}
